@@ -151,7 +151,7 @@ Lancez un conteneur à partir de votre image, montez `api/catalog.json` au bon e
 
 ## 5. Partie 2 — Audit de sécurité avec Trivy (6 pts)
 
-<img src="img/trivy-scan.jpeg" alt="Trivy — Scan de sécurité des images Docker" width="300">
+<img src="img/trivy-scan.jpeg" alt="Trivy — Scan de sécurité des images Docker" width="400">
 
 ### 5.1 Contexte
 
@@ -188,7 +188,7 @@ Rescannez `ic-campus-api:1.1`. Le résultat attendu : `Total: 0 (HIGH: 0, CRITIC
 
 ## 6. Partie 3 — Dockerfile multi-stage du frontend Angular (7 pts)
 
-<img src="img/multistage-build.jpeg" alt="Build multi-stage Docker — Node.js builder → nginx runtime" width="300">
+<img src="img/multistage-build.jpeg" alt="Build multi-stage Docker — Node.js builder → nginx runtime" width="400">
 
 ### 6.1 Avant d'écrire le Stage 2
 
