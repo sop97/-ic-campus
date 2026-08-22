@@ -1,0 +1,54 @@
+# IC-Campus Web — contraintes Dockerfile multi-stage
+# IC-TechDojo · Frazer SADO
+#
+# Deux stages dans le même fichier. Deux FROM. L'image finale ne contient
+# que ce que le second stage y a copié — Node.js et tout ce qui va avec
+# n'apparaissent pas dans l'image livrée. Vérifiez-le après build.
+
+# - Stage 1 — builder -----------------------------------------------------------
+
+# - Image de base
+#   Node.js 20 Alpine. Nommez ce stage "builder". Répertoire de travail : /app.
+
+# - Ordre des copies
+#   package.json et package-lock.json d'abord, npm ci ensuite, puis le code source.
+#   Ne faites pas COPY . . — vous risquez d'embarquer des fichiers inutiles au build.
+#   Sources nécessaires : src/, angular.json, tsconfig*.json
+
+# - Build
+#   npm run build --configuration=production
+#   Le chemin de sortie exact est dans angular.json (cherchez outputPath).
+#   Notez-le — vous en aurez besoin dans le stage 2.
+
+# - Stage 2 — runtime -----------------------------------------------------------
+
+# - Image de base
+#   nginx, variante Alpine, version stable et patchée. "latest" est refusé.
+#   Nommez ce stage "runtime". Appliquez les mises à jour de sécurité Alpine au build.
+
+# - Labels OCI
+#   org.opencontainers.image.title   = "ic-campus-web"
+#   org.opencontainers.image.vendor  = "IC-TechDojo"
+#   org.opencontainers.image.version = "1.0"
+
+# - Utilisateur non-root : icweb, UID 1101
+#   nginx tourne en root par défaut. Sans ajustements, le conteneur crashe immédiatement.
+#   Consultez la documentation officielle de l'image nginx sur Docker Hub — section non-root.
+
+# - Configuration nginx — envsubst
+#   substitue les ${VAR} par les variables d'environnement au démarrage du conteneur.
+#   Tout .template dans /etc/nginx/templates/ est traité automatiquement,
+#   le résultat écrit dans /etc/nginx/conf.d/. Copiez nginx/default.conf.template.
+
+# - Fichiers statiques Angular
+#   Copiez uniquement le contenu compilé depuis le stage builder.
+#   Le chemin source est celui que vous avez relevé dans angular.json.
+
+# - Healthcheck
+#   Docker sonde périodiquement le conteneur et expose son état
+#   (starting / healthy / unhealthy). Le start-period est le délai de grâce
+#   avant que les échecs soient comptés.
+#   nginx expose /health — paramètres : intervalle 15s, timeout 3s, start-period 10s, 3 retries.
+
+# - Port
+#   nginx écoute sur le port 8080 (non-root — 80 est réservé root). Exposez ce port.

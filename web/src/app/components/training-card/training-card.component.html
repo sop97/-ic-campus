@@ -1,0 +1,46 @@
+<article class="card">
+
+  <div class="card__visual">
+    <img [src]="cardImage" [alt]="training.category" class="card__img" loading="lazy" width="800" height="260">
+  </div>
+
+  <div class="card__header">
+    <span class="card__category">{{ training.category }}</span>
+    <span class="card__badge" [attr.data-level]="training.level">{{ training.level }}</span>
+  </div>
+
+  <h3 class="card__title">{{ training.title }}</h3>
+
+  <p class="card__description">{{ training.description }}</p>
+
+  <div class="card__topics" aria-label="Technologies abordées">
+    @for (topic of training.topics; track topic) {
+      <span class="card__topic">{{ topic }}</span>
+    }
+  </div>
+
+  <div class="card__footer">
+    <div class="card__meta">
+      <span class="card__meta-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+          <polyline points="12 6 12 12 16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        {{ training.duration }}
+      </span>
+      <span class="card__price">{{ priceFormatted }}</span>
+    </div>
+    <span class="card__instructor">{{ training.instructor }}</span>
+  </div>
+
+  <div class="card__cta">
+    <a href="https://ic-techdojo.com" target="_blank" rel="noopener noreferrer" class="card__cta-btn">
+      En savoir plus
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <polyline points="12 5 19 12 12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </a>
+  </div>
+
+</article>

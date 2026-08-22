@@ -1,0 +1,63 @@
+<section class="catalog" id="catalog">
+  <div class="catalog__container">
+
+    <!-- ── En-tête ────────────────────────────────────────────────────── -->
+    <div class="catalog__header">
+      <h2 class="catalog__title">Catalogue des formations</h2>
+      @if (!loading() && !error()) {
+        <p class="catalog__count">
+          {{ filteredTrainings().length }} formation{{ filteredTrainings().length > 1 ? 's' : '' }} disponible{{ filteredTrainings().length > 1 ? 's' : '' }}
+        </p>
+      }
+    </div>
+
+    <!-- ── Filtres par niveau ──────────────────────────────────────────── -->
+    <div class="catalog__filters" role="group" aria-label="Filtrer par niveau">
+      @for (filter of filters; track filter) {
+        <button
+          class="filter-btn"
+          [class.filter-btn--active]="activeFilter() === filter"
+          (click)="setFilter(filter)">
+          {{ filter }}
+        </button>
+      }
+    </div>
+
+    <!-- ── États : chargement / erreur / succès ──────────────────────── -->
+    @if (loading()) {
+      <div class="catalog__grid" aria-label="Chargement en cours">
+        @for (i of [1,2,3,4,5,6]; track i) {
+          <div class="skeleton-card">
+            <div class="skeleton skeleton--sm"></div>
+            <div class="skeleton skeleton--lg"></div>
+            <div class="skeleton skeleton--md"></div>
+            <div class="skeleton skeleton--md" style="width:70%"></div>
+            <div class="skeleton-footer">
+              <div class="skeleton skeleton--sm" style="width:40%"></div>
+              <div class="skeleton skeleton--sm" style="width:25%"></div>
+            </div>
+          </div>
+        }
+      </div>
+    } @else if (error()) {
+      <div class="catalog__error">
+        <span class="catalog__error-icon">⚠</span>
+        <p class="catalog__error-msg">{{ error() }}</p>
+        <p class="catalog__error-hint">
+          Vérifiez que le conteneur <code>ic-api</code> est en cours d'exécution
+          et que la configuration nginx est correcte.
+        </p>
+      </div>
+    } @else {
+      <div class="catalog__grid">
+        @for (training of filteredTrainings(); track training.id) {
+          <app-training-card [training]="training" />
+        }
+        @empty {
+          <p class="catalog__empty">Aucune formation pour ce niveau.</p>
+        }
+      </div>
+    }
+
+  </div>
+</section>

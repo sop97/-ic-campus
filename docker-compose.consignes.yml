@@ -1,0 +1,32 @@
+# IC-Campus — contraintes docker-compose
+# IC-TechDojo · Frazer SADO
+#
+
+# SERVICE ic-api
+#
+# image : ic-campus-api:1.0
+# Fixer le nom du conteneur : ic-api — sans ça, Compose préfixe avec le nom du dossier
+# et nginx ne pourra pas résoudre "ic-api" en DNS interne.
+# Rassurez vous de déclarer toutes les variables d'env et les volumes nécessaires pour que Flask fonctionne correctement.
+
+# SERVICE ic-web
+#
+# image : ic-campus-web:1.0
+# Fixer le nom du conteneur : ic-web
+# port : 8080 côté hôte sur le port exposé du conteneur
+# Rassurez vous de déclarer toutes les variables d'env et les volumes nécessaires pour que Flask fonctionne correctement.
+# restart policy : unless-stopped
+#
+# Dépendance : ic-web ne doit pas démarrer avant qu'ic-api soit réellement opérationnel.
+# Un "depends_on" simple garantit uniquement l'ordre de démarrage des processus —
+# pas que Flask répond. Cherchez la condition qui attend le statut healthy dans
+# la doc Docker Compose.
+
+# RÉSEAUX
+#
+# Deux réseaux bridge à déclarer : ic-campus-front et ic-campus-back.
+# Déclarez-les également à la racine du fichier sous la clé "networks:".
+
+# FICHIER .env
+# Utilisez un fichier .env pour stocker les variables d'environnement sensibles (API_USER, API_PASSWORD, CATALOG_PATH)
+# Surtout le déclarer dans le .gitignore pour éviter de le versionner dans Git.

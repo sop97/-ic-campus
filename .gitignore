@@ -1,0 +1,33 @@
+# Secrets — ne jamais committer
+.env
+
+# Node
+web/node_modules/
+web/dist/
+web/.angular/
+npm-debug.log*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Docker
+*.tar
+
+# Rapports de scan
+trivy-report*.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Prompts internes
+NANOBANANA_PROMPTS.md

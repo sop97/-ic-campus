@@ -1,0 +1,133 @@
+.catalog {
+  padding: 5rem 2rem 6rem;
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  // ── Header ───────────────────────────────────────────────────────────────
+  &__header {
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.4rem;
+  }
+
+  &__count {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  // ── Filtres ──────────────────────────────────────────────────────────────
+  &__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 2.5rem;
+  }
+
+  // ── Grid ─────────────────────────────────────────────────────────────────
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+
+  // ── État vide ────────────────────────────────────────────────────────────
+  &__empty {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    padding: 2rem 0;
+  }
+
+  // ── État erreur ──────────────────────────────────────────────────────────
+  &__error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+
+  &__error-icon {
+    font-size: 2.5rem;
+    color: var(--color-amber);
+  }
+
+  &__error-msg {
+    font-size: 1rem;
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  &__error-hint {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    max-width: 480px;
+
+    code {
+      background: var(--color-surface);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--color-accent);
+    }
+  }
+}
+
+// ── Filter buttons ────────────────────────────────────────────────────────
+.filter-btn {
+  padding: 0.4rem 1.1rem;
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition);
+
+  &:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+  }
+
+  &--active {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+    font-weight: 600;
+  }
+}
+
+// ── Skeleton cards ────────────────────────────────────────────────────────
+.skeleton-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.skeleton {
+  &--sm  { height: 14px; width: 100%; }
+  &--md  { height: 14px; width: 100%; }
+  &--lg  { height: 22px; width: 75%; }
+}
+
+.skeleton-footer {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border-subtle);
+  gap: 1rem;
+}

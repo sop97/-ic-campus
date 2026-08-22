@@ -1,0 +1,58 @@
+<section class="hero">
+
+  <!-- Blobs décoratifs animés -->
+  <div class="hero__bg" aria-hidden="true">
+    <div class="hero__blob hero__blob--1"></div>
+    <div class="hero__blob hero__blob--2"></div>
+  </div>
+
+  <div class="hero__container">
+    <div class="hero__layout">
+
+      <!-- Colonne texte -->
+      <div class="hero__text">
+        <span class="hero__badge">IC-TechDojo · Portail interne des formations</span>
+
+        <h1 class="hero__title">
+          Maîtrisez les réflexes<br>
+          <span class="hero__accent">DevOps &amp; Cloud</span><br>
+          qui font la différence en prod
+        </h1>
+
+        <p class="hero__subtitle">
+          Des formations courtes, denses et immédiatement applicables.
+          Pas de slides théoriques — des labs réels, des retours d'incidents vrais,
+          une progression mesurable sprint après sprint.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#catalog" class="btn btn--primary">Voir le catalogue →</a>
+          <a href="https://ic-techdojo.com" target="_blank" rel="noopener noreferrer" class="btn btn--ghost">
+            En savoir plus
+          </a>
+        </div>
+
+        <div class="hero__stats">
+          @for (stat of stats; track stat.label) {
+            <div class="hero__stat">
+              <span class="hero__stat-value">{{ stat.value }}</span>
+              <span class="hero__stat-label">{{ stat.label }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Colonne illustration -->
+      <div class="hero__visual" aria-hidden="true">
+        <img
+          class="hero__illustration"
+          src="assets/img/hero-banner.jpeg"
+          alt=""
+          loading="eager"
+          width="640"
+          height="357">
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,42 @@
+# IC-Campus API — contraintes Dockerfile
+# IC-TechDojo · Frazer SADO
+#
+# Lisez catalog.py avant d'écrire quoi que ce soit. Pas en diagonale — en entier.
+# Vous y trouverez le port, les variables d'environnement attendues, la route
+# de healthcheck et le nom de l'objet WSGI. Tout ce dont vous avez besoin est là.
+
+# - Image de base
+#   Python 3.12, variante Alpine. Pas "latest". Choisissez un tag précis et
+#   vérifiez avec Trivy avant de livrer — c'est l'objet de la partie 2.
+
+# - Labels OCI
+#   Obligatoires sur toutes nos images en production. Ils permettent à un registre,
+#   un scanner ou un système d'observabilité de savoir qui a produit l'image,
+#   quelle version c'est, et quel pipeline l'a buildée. Sans eux, impossible de tracer.
+#   org.opencontainers.image.title   = "ic-campus-api"
+#   org.opencontainers.image.vendor  = "IC-TechDojo"
+#   org.opencontainers.image.version = "1.0"
+
+# - Répertoire, port, volume
+#   Répertoire de travail : /app
+#   Port exposé : 5000
+#   Volume : /data — catalog.json sera monté ici au runtime, pas copié dans l'image.
+
+# - Dépendances Python
+#   Copiez d'abord requirements.txt, installez, puis copiez le code source.
+#   Dans cet ordre. Si vous ne comprenez pas pourquoi, relisez le cours sur le cache Docker.
+#   Sans l'option --no-cache-dir, pip laisse des fichiers temporaires dans l'image.
+
+# - Utilisateur non-root : icapi, UID 1001
+#   Ajustez les permissions sur /app et /data avant de basculer sur cet utilisateur.
+
+# - Healthcheck
+#   Docker sonde périodiquement le conteneur et expose son état
+#   (starting / healthy / unhealthy). C'est ce statut que docker-compose attend
+#   avec "depends_on: condition: service_healthy". Sans HEALTHCHECK, ça ne marche pas.
+#   Route à tester : dans catalog.py. Paramètres : intervalle 30s, timeout 5s, 3 retries.
+
+# - Commande de démarrage
+#   gunicorn --bind 0.0.0.0:5000 --workers 2 catalog:app
+#   Flask intégré = mono-thread sans gestion des signaux. gunicorn est là pour ça.
+#   "catalog:app" = module:objet WSGI. Exec form obligatoire — pas la syntaxe shell.

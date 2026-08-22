@@ -1,0 +1,27 @@
+<header class="navbar">
+  <div class="navbar__container">
+
+    <a class="navbar__brand" href="#">
+      <img class="navbar__logo" src="assets/img/logo.jpeg" alt="IC-TechDojo" width="40" height="40" loading="eager">
+    </a>
+
+    <nav class="navbar__nav" [class.navbar__nav--open]="menuOpen()" aria-label="Navigation principale">
+      <a href="#catalog" class="navbar__link" (click)="menuOpen.set(false)">Catalogue</a>
+      <a href="#about"   class="navbar__link" (click)="menuOpen.set(false)">À propos</a>
+      <a href="https://ic-techdojo.com" target="_blank" rel="noopener noreferrer" class="navbar__cta">
+        IC-TechDojo →
+      </a>
+    </nav>
+
+    <button
+      class="navbar__toggle"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="menuOpen()"
+      aria-label="Ouvrir le menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+</header>

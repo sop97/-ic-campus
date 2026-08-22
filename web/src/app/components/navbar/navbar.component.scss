@@ -1,0 +1,115 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(13, 27, 42, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+    &:hover { opacity: 0.88; }
+  }
+
+  &__logo {
+    display: block;
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 10px;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  &__link {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: color 0.2s;
+
+    &:hover { color: var(--color-text); }
+  }
+
+  &__cta {
+    padding: 0.45rem 1.1rem;
+    background: var(--color-accent);
+    color: #fff;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.88rem;
+    transition: var(--transition);
+
+    &:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-1px);
+    }
+  }
+
+  &__toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+
+    span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--color-text);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+  }
+
+  @media (max-width: 768px) {
+    &__toggle { display: flex; }
+
+    &__nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1rem 2rem 1.5rem;
+
+      &--open { display: flex; }
+    }
+
+    &__link {
+      padding: 0.6rem 0;
+      width: 100%;
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+
+    &__cta {
+      margin-top: 0.75rem;
+    }
+  }
+}
